@@ -12,7 +12,7 @@ class GiaSuc{
             this->soluong = sl;
             tongsua = 0;
         } 
-        string virtual PhatTiengKeu();
+        virtual string PhatTiengKeu() = 0;
         int virtual ChoSua() {return 0;};
         int virtual SinhCon() {return 0;};
         void TinhTongSua() {
@@ -28,8 +28,8 @@ class GiaSuc{
             }
             soluong += SoConMoi;
         } 
-        int GetSua() { return tongsua; };
-        int GetSoLuong() { return soluong; };
+        int GetSua() { return tongsua;};
+        int GetSoLuong() {return soluong;};
 };
 
 class Bo : public GiaSuc{
@@ -85,9 +85,9 @@ class DanhSach{
             cout << "Nhap so luong con de: ";
             cin >> SlDe;
             //Khoi tao
-            DSgiasuc.push_back(new Bo::GiaSuc(SlBo));
-            DSgiasuc.push_back(new De::GiaSuc(SlDe));
-            DSgiasuc.push_back(new Cuu::GiaSuc(SlCuu));
+            DSgiasuc.push_back(new Bo(SlBo));
+            DSgiasuc.push_back(new De(SlDe));
+            DSgiasuc.push_back(new Cuu(SlCuu));
         }
         void InTiengKeu(){
             cout << endl;
@@ -106,7 +106,7 @@ class DanhSach{
                 DSgiasuc[i]->TinhTongSua();
                 sum_Sua += DSgiasuc[i]->GetSua();
             }
-            cout << "Tong luong sua cua trang trai la: " << sum_Sua << "l" << endl;
+            cout << "Tong luong sua cua trang trai la: " << sum_Sua << " lit" << endl;
         }
         void InSoLuong(){
             for (int i = 0; i < DSgiasuc.size(); i++){
@@ -114,7 +114,7 @@ class DanhSach{
             }
             cout << endl;
             cout << "___BAI 2___" << endl;
-            cout << "Ket qua sau luot sinh con va cho sua";
+            cout << "Ket qua sau luot sinh con va cho sua"  << endl;
             cout << "So luong bo: " << DSgiasuc[0]->GetSoLuong() << endl;
             cout << "So luong de: " << DSgiasuc[1]->GetSoLuong() << endl;
             cout << "So luong cuu: " << DSgiasuc[2]->GetSoLuong() << endl;
@@ -123,6 +123,7 @@ class DanhSach{
 
 int main()
 {
+    srand(time(0));
     DanhSach farm;
     farm.NhapDS();
     farm.InTiengKeu();
